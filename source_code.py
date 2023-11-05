@@ -65,7 +65,8 @@ def partition(A, l, r):
 
 def TwoPivotQuicksort(A, l=None, r=None):
     if l is None:
-    	l, r = 0, len(A)
+        l, r = 0, len(A)
+        A = A.copy()
 
     rec_stack = [(l, r)]
 
@@ -84,50 +85,52 @@ def TwoPivotQuicksort(A, l=None, r=None):
         rec_stack.append((i+1, j))
         rec_stack.append((j+1, r))
 
+    return A
+
 def display_total_memory(sorting_func, A):
     memory_usages = memory_usage((display_total_running_time, (sorting_func, A)), max_iterations=1)
     print(f"Total memori yang digunakan: {max(memory_usages)} MB")
 
 def display_total_running_time(sorting_func, A):
-	start_time = time.time()
-	print(f"Waktu sorting dimulai: {start_time}")
-	sorting_func(A) 
-	end_time = time.time()
-	print(f"Waktu sorting selesai: {end_time}")
-	print(f'Total waktu: {(end_time - start_time) * 1000} ms')
+    start_time = time.time()
+    print(f"Waktu sorting dimulai: {start_time}")
+    sorting_func(A) 
+    end_time = time.time()
+    print(f"Waktu sorting selesai: {end_time}")
+    print(f'Total waktu: {(end_time - start_time) * 1000} ms')
 
 def find_total_memory(A):
-	print("-------------- Two Pivot Quicksort --------------")
-	display_total_memory(TwoPivotQuicksort, A)
-	print()
+    print("-------------- Two Pivot Quicksort --------------")
+    display_total_memory(TwoPivotQuicksort, A)
+    print()
 
-	print("------------------- Merge Sort -------------------")
-	display_total_memory(MergeSort, A)
-	print()
-	print()
+    print("------------------- Merge Sort -------------------")
+    display_total_memory(MergeSort, A)
+    print()
+    print()
 
 if __name__ == '__main__':
-	for p in [9, 13, 16]:
+    for p in [9, 13, 16]:
 
-		print("============================================================")
+        print("============================================================")
 
-		print("Status array: sorted")
-		print(f"Ukuran array: 2^{p}\n\n")
-		arr_size = 2**p
-		A = [i for i in range(arr_size)]
+        print("Status array: sorted")
+        print(f"Ukuran array: 2^{p}\n\n")
+        arr_size = 2**p
+        A = [i for i in range(arr_size)]
 
-		find_total_memory(A)
+        find_total_memory(A)
 
-		print("Status array: random")
-		print(f"Ukuran array: 2^{p}\n\n")
-		arr_size = 2**p
-		A = [randint(-1000000, 1000000) for i in range(arr_size)]
+        print("Status array: random")
+        print(f"Ukuran array: 2^{p}\n\n")
+        arr_size = 2**p
+        A = [randint(-1000000, 1000000) for i in range(arr_size)]
 
-		find_total_memory(A)
+        find_total_memory(A)
 
-		print("Status array: reversed")
-		print(f"Ukuran array: 2^{p}\n\n")
-		arr_size = 2**p
-		A = [-i for i in range(arr_size)]
+        print("Status array: reversed")
+        print(f"Ukuran array: 2^{p}\n\n")
+        arr_size = 2**p
+        A = [-i for i in range(arr_size)]
 
-		find_total_memory(A)
+        find_total_memory(A)
